@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>WeB y Patrones</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <header>
-            <h1>Ejemplo de un Index</h1>
-        </header>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"      
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Ejemplo de Tienda en Línea</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <h1>Ejemplo de un index.html</h1>
+    </header>
 
-        <main>
-            <h2>Esta es la tienda en línea del curso</h2>
-        </main>
+    <section>
+        <h2>Esta es la tienda en línea del curso</h2>
+        <h2>[[#{carrito.titulo}]]</h2>
+    </section>
 
-        <footer>
-            <h3>Todos los derechos reservados de Techshop &COPY;</h3>
-        </footer>
-    </body>
+    <footer>
+        <h3>Todos los Derechos Reservados TechShop 2025 &copy;</h3>
+    </footer>
+</body>
 </html>
