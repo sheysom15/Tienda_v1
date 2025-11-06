@@ -4,6 +4,8 @@
  */
 package com.tienda.domain;
 
+import java.util.List; 
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,4 +35,6 @@ public class Categoria implements Serializable{
     @Column(name = "activo")
     private Boolean activo; 
     
+    @OneToMany(mappedBy="categoria")
+    private List<Producto> producto;
 }
