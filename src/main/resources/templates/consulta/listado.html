@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta de Productos</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+    <style>
+        body {
+            background-color: #f7fbe7; /* verde muy claro de fondo */
+        }
+        h2 {
+            color: #fbc02d; /* amarillo brillante */
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #555;
+        }
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        thead {
+            background-color: #388e3c; /* verde fuerte */
+            color: #fff;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #dcedc8; /* verde claro */
+        }
+        tbody tr:hover {
+            background-color: #fbc02d; /* amarillo al pasar el mouse */
+            color: #000;
+        }
+        .btn-verde {
+            background-color: #388e3c;
+            color: #fff;
+        }
+        .btn-verde:hover {
+            background-color: #2e7d32;
+            color: #fff;
+        }
+        .filtros {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Listado de Productos</h2>
+
+    <div class="filtros row mb-4">
+        <div class="col-md-3">
+            <label>Precio Mínimo:</label>
+            <input type="number" class="form-control" th:value="${min}" readonly>
+        </div>
+        <div class="col-md-3">
+            <label>Precio Máximo:</label>
+            <input type="number" class="form-control" th:value="${max}" readonly>
+        </div>
+        <div class="col-md-3">
+            <label>Categoría:</label>
+            <input type="text" class="form-control" th:value="${categoria}" readonly>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <span class="badge bg-success p-2">Total Productos: <span th:text="${total}"></span></span>
+        </div>
+    </div>
+
+    <table class="table table-hover text-center">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Activo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="prod : ${productos}">
+                <td th:text="${prod.idProducto}"></td>
+                <td th:text="${prod.descripcion}"></td>
+                <td th:text="${prod.precio}"></td>
+                <td th:text="${prod.activo} ? 'Sí' : 'No'"></td>
+                <td>
+                    <button class="btn btn-verde btn-sm">Editar</button>
+                    <button class="btn btn-warning btn-sm">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

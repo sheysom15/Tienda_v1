@@ -36,5 +36,5 @@ public class Categoria implements Serializable{
     private Boolean activo; 
     
     @OneToMany(mappedBy="categoria")
-    private List<Producto> producto;
+    private List<Producto> productos;
 }

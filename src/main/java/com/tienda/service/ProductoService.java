@@ -1,7 +1,7 @@
 package com.tienda.service;
 
 import com.tienda.domain.Producto;
-import com.tienda.repository.Productorepository; // ← aquí con r minúscula
+import com.tienda.repository.ProductoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductoService {
 
     @Autowired
-    private Productorepository productoRepository; // ← también con r minúscula
+    private ProductoRepository productoRepository;
     
     @Transactional(readOnly = true)
     public List<Producto> getProductos(boolean activo) {
@@ -21,28 +21,43 @@ public class ProductoService {
         }
         return lista;
     }
-@Transactional
-public void save(Producto producto) {
-    productoRepository.save(producto);
-    
-}
-    
-@Transactional
-public boolean delete(Producto producto) {
-    try {
-        productoRepository.delete(producto);
-        productoRepository.flush();
-        return true;
-    } catch (Exception e) {
-        System.err.println("Error al eliminar la categoría: " + e.getMessage());
-        return false;
+
+    @Transactional
+    public void save(Producto producto) {
+        productoRepository.save(producto);
     }
-}
-
-@Transactional(readOnly = true)
-public Producto getProducto(Producto producto) {
     
+    @Transactional
+    public boolean delete(Producto producto) {
+        try {
+            productoRepository.delete(producto);
+            productoRepository.flush();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error al eliminar el producto: " + e.getMessage());
+            return false;
+        }
+    }
 
-    return productoRepository.findById(producto.getIdProducto()).orElse(null);
+    @Transactional(readOnly = true)
+    public Producto getProducto(Producto producto) {
+        return productoRepository.findById(producto.getIdProducto()).orElse(null);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, double precioSup) {
+        return productoRepository.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
+    }
+      
+
+@Transactional(readOnly=true)
+public List<Producto> metodoJPQL(double precioInf, double precioSup) {
+    return productoRepository.metodoJPQL(precioInf, precioSup);
 }
- }
+@Transactional(readOnly = true)
+public List<Producto> buscarPorPrecioYCategoria(double min, double max, String categoria) {
+    return productoRepository.buscarPorPrecioYCategoria(min, max, categoria);
+}
+
+
+}
